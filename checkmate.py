@@ -24,7 +24,7 @@ class BestCheckpointSaver(object):
         Args:
             save_dir: The directory in which the checkpoint files will be saved
             num_to_keep: The number of best checkpoint files to retain
-            maximize: Define 'best' values as greater than others.  For example,
+            maximize: Define 'best' values to be the highest values.  For example,
               set this to True if selecting for the checkpoints with the highest
               given accuracy.  Or set to False to select for checkpoints with the
               lowest given error rate.
