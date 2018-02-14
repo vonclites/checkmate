@@ -9,15 +9,15 @@ class BestCheckpointSaver(object):
     """Maintains a directory containing only the best n checkpoints
 
     Inside the directory is a best_checkpoints JSON file containing a dictionary
-    mapping of the best checkpoint filepaths to values by which they are compared.
-    Only the best n checkpoints are contained in the directory and JSON file.
+    mapping of the best checkpoint filepaths to the values by which the the checkpoints
+    are compared.  Only the best n checkpoints are contained in the directory and JSON file.
 
     This is a light-weight wrapper class only intended to work in simple,
     non-distributed settings.  It is not intended to work with the tf.Estimator
     framework.
     """
     def __init__(self, save_dir, num_to_keep=1, maximize=True, saver=None):
-        """Creates a
+        """Creates a `BestCheckpointSaver`
 
         `BestCheckpointSaver` acts as a wrapper class around a `tf.train.Saver`
 
