@@ -45,5 +45,5 @@ saver = tf.train.Saver()
 saver.restore(sess, checkmate.get_best_checkpoint(best_checkpoint_dir, maximize=True))
 ```
 
-At this stage, the module is no-frills with limited documentation.  It is not intended to work in distributed settings or with complex Session/Graph managed as in the tf.Estimator framework.  Contributions are welcome.
+At this stage, the module is no-frills with limited documentation.  It is not intended to work in distributed settings or with complex Session/Graph management as in the tf.Estimator framework.  Contributions are welcome.
 
