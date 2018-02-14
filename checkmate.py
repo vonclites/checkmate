@@ -5,7 +5,6 @@ import numpy as np
 import tensorflow as tf
 
 
-# TODO: Set if 'best' is a maximal or minimal value
 class BestCheckpointSaver(object):
     """Maintains a directory containing only the best n checkpoints
 
