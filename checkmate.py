@@ -21,7 +21,6 @@ class BestCheckpointSaver(object):
 
         `BestCheckpointSaver` acts as a wrapper class around a `tf.train.Saver`
 
-
         Args:
             save_dir: The directory in which the checkpoint files will be saved
             num_to_keep: The number of best checkpoint files to retain
