@@ -70,10 +70,10 @@ class BestCheckpointSaver(object):
 
         if self._maximize:
             should_save = not all(current_best >= value
-                                  for _, current_best in best_checkpoints.items())
+                                  for current_best in best_checkpoints.values())
         else:
             should_save = not all(current_best <= value
-                                  for _, current_best in best_checkpoints.items())
+                                  for current_best in best_checkpoints.values())
         if should_save:
             best_checkpoints = self._sort(best_checkpoints)
             worst_checkpoint = os.path.join(self._save_dir,
