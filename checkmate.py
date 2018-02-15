@@ -75,16 +75,17 @@ class BestCheckpointSaver(object):
             should_save = not all(current_best <= value
                                   for current_best in best_checkpoints.values())
         if should_save:
-            best_checkpoints = self._sort(best_checkpoints)
-            worst_checkpoint = os.path.join(self._save_dir,
-                                            best_checkpoints[-1][0])
-            self._remove_outdated_checkpoint_files(worst_checkpoint)
+            best_checkpoint_list = self._sort(best_checkpoints)
 
-            best_checkpoints[-1] = (current_ckpt, value)
-            best_checkpoints = dict(best_checkpoints)
+            worst_checkpoint = os.path.join(self._save_dir,
+                                            best_checkpoints.pop(-1)[0])
+            self._remove_outdated_checkpoint_files(worst_checkpoint)
+            self._update_internal_saver_state(best_checkpoint_list)
+
+            best_checkpoints = dict(best_checkpoint_list)
+            best_checkpoints[current_ckpt] = value
             self._save_best_checkpoints_file(best_checkpoints)
 
-            self._update_internal_saver_state(best_checkpoints)
             self._saver.save(sess, self._save_path, global_step_tensor)
 
     def _save_best_checkpoints_file(self, updated_best_checkpoints):
@@ -96,12 +97,10 @@ class BestCheckpointSaver(object):
         for ckpt_file in glob.glob(worst_checkpoint + '.*'):
             os.remove(ckpt_file)
 
-    def _update_internal_saver_state(self, best_checkpoints):
+    def _update_internal_saver_state(self, best_checkpoint_list):
         best_checkpoint_files = [
-            (ckpt, np.inf)
-            for ckpt in sorted(best_checkpoints,
-                               key=best_checkpoints.get,
-                               reverse=self._maximize)
+            (ckpt[0], np.inf)  # TODO: Try to use actual file timestamp
+            for ckpt in best_checkpoint_list
         ]
         self._saver.set_last_checkpoints_with_time(best_checkpoint_files)
 
