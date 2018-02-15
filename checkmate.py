@@ -78,7 +78,7 @@ class BestCheckpointSaver(object):
             best_checkpoint_list = self._sort(best_checkpoints)
 
             worst_checkpoint = os.path.join(self._save_dir,
-                                            best_checkpoints.pop(-1)[0])
+                                            best_checkpoint_list.pop(-1)[0])
             self._remove_outdated_checkpoint_files(worst_checkpoint)
             self._update_internal_saver_state(best_checkpoint_list)
 
