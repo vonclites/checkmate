@@ -1,6 +1,4 @@
 # checkmate
-A lightweight class for saving only the best performing Tensorflow checkpoints.
-
 Checkmate is designed to be a simple drop-in solution for a very common [Tensorflow](https://www.tensorflow.org/) use-case: keeping track of the best model checkpoints during training.
 
 
